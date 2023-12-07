@@ -46,6 +46,21 @@ export class HomeComponent implements OnInit, OnDestroy {
       // observervable ends: completed
       console.log('COMPLETE')
     })
+
+    // ALTERNATIVE syntax: pass in observable object
+    // .subscribe({
+    //   next: data => {
+    //     console.log(data)
+    //   },
+    //   error: error => {
+    //     // observervable ends: cancelled due to error
+    //     console.error(error)
+    //   },
+    //   complete: complete => {
+    //     // observervable ends: completed
+    //     console.log('COMPLETE')
+    //   }
+    // })
   }
 
   ngOnDestroy(): void {
