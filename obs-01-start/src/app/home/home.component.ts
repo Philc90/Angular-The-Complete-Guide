@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, Subscription, from, fromEvent, interval, pipe } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription, from, fromEvent, interval, of, pipe } from 'rxjs';
 import { Observable } from 'rxjs-compat';
 import { filter, map, takeUntil } from 'rxjs/operators';
 
@@ -15,26 +15,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor() { }
 
   ngOnInit() {
-
-    // map operator example
-    // const clicks = fromEvent<PointerEvent>(document, 'click');
-    // const positions = clicks.pipe(map(ev => ev.clientX));
-
-    // positions.subscribe(x => console.log(x));
-
-    // takeUntil operator example
-    // const source = interval(1000);
-    // const clicks = fromEvent(document, 'click');
-    // const result = source.pipe(takeUntil(clicks));
-    // result.subscribe(x => console.log(x), err => console.log(err), () => console.log("done"));
-
-
     // create observable from array example
-    // from([1, 2, 3]).pipe(
-    //   map(x => x * 2)
-    // ).subscribe(
+    // from([1, 2, 3]).subscribe(
     //   num => console.log('from array:',num)
     // )
+
+    // of('a', 'b', 'c').subscribe(
+    //   num => console.log('from of:', num)
+    // )
+
 
     // example: interval
     // this.firstObsSubscription = interval(1000).subscribe(count => {
@@ -55,12 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     //   },1000)
     // })
 
-    // this.firstObsSubscription = customIntervalObservable.pipe(filter((data: number) => {
-    //   return data > 0;
-    // }),
-    // map((data:number) => {
-    //   return 'Round: ' + (data+1)
-    // })).subscribe(data => {
+    // this.firstObsSubscription = customIntervalObservable.subscribe(data => {
     //   console.log(data)
     // }, error => {
     //   // observervable ends: cancelled due to error
@@ -71,23 +55,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     // })
 
 
-    // ALTERNATIVE syntax: pass in observable object
-    // .subscribe({
-    //   next: data => {
-    //     console.log(data)
-    //   },
-    //   error: error => {
-    //     // observervable ends: cancelled due to error
-    //     console.error(error)
-    //   },
-    //   complete: complete => {
-    //     // observervable ends: completed
-    //     console.log('COMPLETE')
-    //   }
-    // })
 
 
-    
     // https://www.youtube.com/watch?v=_iXd0SWr3Sw
 
     // const cold = new Observable((observer) => {
@@ -109,6 +78,59 @@ export class HomeComponent implements OnInit, OnDestroy {
     // })
 
     // hot.next(Math.round(Math.random() * 10))
+
+
+
+    // hot observable example: BehaviorSubject
+    // const hot = new BehaviorSubject(0);
+    // hot.next(Math.round(Math.random() * 10))
+    // hot.subscribe(res => {
+    //   console.log('hot:', res)
+    // })
+
+    // hot.subscribe(res => {
+    //   console.log('hot:', res)
+    // })
+
+
+
+
+
+    // map operator example
+    // const clicks = fromEvent<PointerEvent>(document, 'click');
+    // const positions = clicks.pipe(map(ev => ev.clientX));
+
+    // positions.subscribe(x => console.log(x));
+
+    // takeUntil operator example
+    // const source = interval(1000);
+    // const clicks = fromEvent(document, 'click');
+    // const result = source.pipe(takeUntil(clicks));
+    // result.subscribe(x => console.log(x), err => console.log(err), () => console.log("done"));
+
+
+
+    // demo: chained operators
+    // this.firstObsSubscription = customIntervalObservable.pipe(
+    //   filter((data: number) => {
+    //     return data > 0;
+    //   }),
+    //   map((data:number) => {
+    //     return 'plus 1: ' + (data+1)
+    //   })
+    // ).subscribe(data => {
+    //   console.log(data)
+    // }, error => {
+    //   // observervable ends: cancelled due to error
+    //   console.error(error)
+    // }, () => {
+    //   // observervable ends: completed
+    //   console.log('COMPLETE')
+    // })
+
+
+
+
   }
 
   ngOnDestroy(): void {
